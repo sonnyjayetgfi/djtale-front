@@ -1,0 +1,55 @@
+@import '../../../styles.scss';
+
+.login-form,.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:80vh;
+  mat-card {
+    border-radius: 30px;
+    background-color: $blue;
+    border: 1px solid black;
+    width: 400px;
+    min-height: 320px;
+    margin-top: auto;
+    margin-bottom: auto;
+    mat-card-header {
+      mat-card-title {
+        font-size:30px;
+        text-align:center;
+        // width: auto;
+        width:350px;
+      }
+    }
+    .errorMessage {
+      color: $pink;
+      font-size:19px;
+    }
+    mat-card-content {
+      font-size:18px;
+      mat-form-field.full-width {
+        width: 100%;
+        margin : 15px 0;
+        input {
+          padding-left:10px;
+        }
+      }
+    }
+    mat-card-actions {
+      width: 100%; 
+      button {
+        float:right;
+        background-color : white;
+      }
+      .registerLink {
+        // font-weight: bold;
+        vertical-align: middle;
+        line-height: 40px;
+        text-decoration: underline;
+        cursor:pointer;
+
+      }
+    }
+  }
+
+}

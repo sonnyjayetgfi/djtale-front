@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="header-container">
+    <span class="header">
+      <mat-icon class="header-icon">list</mat-icon>My playlists
+    </span>
+  </div>
+  <div class="content-container">
+    <div class="content">
+      <div class="left-side">
+        <div class="addPlaylist" (click)="addPlaylist()" ><mat-icon class="header-icon">add</mat-icon>Add Playlist</div>
+        <mat-list class="list-container">
+          <mat-list-item class="playlist-container" [ngClass]="{selected: playlist._id === selectedPlaylist._id}" (click)="openPlaylist(playlist)" *ngFor="let playlist of playlistList">
+            <div class="title-container" >{{playlist.name}}  </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="right-side">
+        <mat-list class="songList-container" *ngIf="selectedPlaylist">
+          <mat-list-item class="song-container"  *ngFor="let song of selectedPlaylist.songs">
+            <div *ngIf="selectedPlaylist.songs" class="song">
+              <img src="{{song.imgUrl}}"/>
+              <div class="song-infos" >{{song.priority + 1}}. &nbsp; &nbsp; <b>{{song.name}}</b></div>
+                
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+</div>

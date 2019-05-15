@@ -1,0 +1,129 @@
+@import 'src/styles.scss';
+
+.container { 
+
+  .header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .header {
+      .header-icon {
+        padding-right:20px;
+        font-size:30px;
+        vertical-align: -20%;
+      }
+      margin-top:20px;
+      width: 250px;
+      height:50px;
+      line-height: 50px;
+      text-align: center;
+      border-radius:20px;
+      border: 1px solid black;
+      font-size:26px;
+      background-color: $yellow;
+      color:white;
+    }
+  }
+  .content-container {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    .content {
+      margin-top:25px;
+      display: flex;
+      align-items: flex-start;
+      .left-side {
+        .addPlaylist {
+          .header-icon {
+            font-size: 18px;
+            padding-left:5px;
+            padding-right:10px;
+            font-size:30px;
+            vertical-align: -20%;
+          }
+          cursor:pointer;
+          float:right;
+          font-size:20px;
+          padding-right:10px;
+          border: 1px solid white;
+          margin-top:10px;
+          margin-right: 10px;
+          border-radius:50px;
+          color: white;
+          margin-bottom:10px;
+        }
+        width: 20vw;
+        height: 80vh;
+        background-color: $pink;
+        border-radius: 40px 0 0 40px;
+        border: 1px solid black;
+        border-right:0;
+        .list-container {
+          height: 70vh;
+          width: 19vw;
+          overflow-y:auto;
+           margin-top:40px;
+           .playlist-container {
+             cursor: pointer;
+             background-color: $violet;
+             margin: 10px;
+             width:90%;
+             border-radius:20px;
+             color: white;
+             border: 1px solid white;
+             &:hover {
+               border: 1px solid $blue;
+             }
+             &.selected {
+              border: 1px solid $blue;
+              .title-container {
+                color:black;
+              }
+             }
+           }
+        }
+      }
+      .right-side {
+        width: 40vw;
+        height:80vh;
+        background-color: $blue;
+        border-radius: 0 40px 40px 0;
+        border: 1px solid black;
+        border-left:0;
+        .songList-container {
+          margin-top:100px;
+          height:80px;
+          width:40vw;
+          .song-container {
+            // margin-top:100px;
+            margin-bottom:100px;
+            .song {
+              height: 100px;
+              width: 39vw;
+              border-radius: 0px 0 0 50px;
+              border: 1px solid $pink;
+              &:hover {
+                border-color: black;
+              }
+              .song-infos {
+                vertical-align: middle;
+                line-height: 100px;
+                height: 100px;
+                padding-left:25px;
+              }
+              
+              background-color:white;
+              img {
+                height: 100px;
+                float:right;
+                // padding-top:50px;
+              }
+            }
+          }
+        }
+      
+      }
+    }
+  }
+
+}
