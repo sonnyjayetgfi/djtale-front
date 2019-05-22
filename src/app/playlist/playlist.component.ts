@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PlaylistService } from './playlist.service';
 import { Playlist } from '../core/playlist';
 import  * as moment  from 'moment';
+import { of } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-playlist',
@@ -31,8 +33,43 @@ export class PlaylistComponent implements OnInit {
     })
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    // moveItemInArray(this.selectedPlaylist.songs, event.previousIndex, event.currentIndex);
+    this.setNewPriority(this.selectedPlaylist.songs[event.previousIndex], event.currentIndex);
+  }
+
   openPlaylist(playlist) {
     this.selectedPlaylist = playlist;
+  }
+
+
+  setNewPriority(song, priority) {
+    this.playlistService.updatePriority(this.user._id, this.selectedPlaylist._id, song._id, priority).subscribe(res => {
+      console.log(res)
+      this.playlistList = res.data;
+      this.selectedPlaylist = this.playlistList.filter(a => a._id == song.playlistId)[0];
+      this.selectedPlaylist.songs.sort( this.compare )
+    })
+  }
+
+  increasePriority(song){
+    if(song.priority === 0) {
+      return;
+    }
+    const currentPriority = song.priority;
+    this.setNewPriority(song, currentPriority -1);
+  }
+
+  reducePriority(song){
+    if(song.priority === this.selectedPlaylist.songs.length -1) {
+      return;
+    }
+    const currentPriority = song.priority;
+    this.setNewPriority(song, currentPriority +1);
+  }
+
+  compare(a, b) {
+    return a.priority < b.priority ? -1 : 1;
   }
 
 }

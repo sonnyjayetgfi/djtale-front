@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="header-container">
     <span class="header">
       <mat-icon class="header-icon">list</mat-icon>My playlists
@@ -25,6 +25,60 @@
           </mat-list-item>
         </mat-list>
       </div>
+    </div>
+  </div>
+</div> -->
+<div class="container">
+  <div class="lists">
+    <div class="header"><span>Playlists</span></div>
+    <div class="content">
+      <mat-list>
+        <mat-list-item *ngFor="let playlist of playlistList" (click)="openPlaylist(playlist)"
+          [ngClass]="{selected: playlist._id === selectedPlaylist._id}">
+          <div class="playlist">
+            <div class="title">{{playlist.name}}</div>
+          </div>
+
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div class="songs">
+    <div class="header">
+      <span>Songs in {{selectedPlaylist.name}}</span>
+      <span>
+        <mat-icon class="header-icon" (click)="displayPlaylistOption()" svg-icon="dots-horizontal"></mat-icon>
+      </span>
+    </div>
+    <div class="content">
+      <mat-list cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="selectedPlaylist">
+        <mat-list-item cdkDrag *ngFor="let song of selectedPlaylist.songs">
+          <img *cdkDragPreview [src]="song.imgUrl">
+          
+          <div class="song">
+            <div class="infos">
+              <span class="title"> <b> {{song.name}} </b> </span>
+              <span class="author"> {{song.author}} ({{song.time}}) </span>
+              <!-- <span class="time">  <b>{{song.time}}</b></span>             -->
+            </div>
+            <div class="actions">
+              <div class="remove">
+                <mat-icon>highlight_off</mat-icon> Remove from playlist
+              </div>
+              <div class="increase" (click)="increasePriority(song)">
+                <mat-icon>arrow_upward</mat-icon> Increase priority
+              </div>
+              <div class="reduce" (click)="reducePriority(song)">
+                <mat-icon>arrow_downward</mat-icon> Reduce priority
+              </div>
+            </div>
+            <span class="img">
+              <img src="{{song.imgUrl}}">
+            </span>
+          </div>
+          <div class="example-custom-placeholder" *cdkDragPlaceholder>Drop here to change priority order</div>
+        </mat-list-item>
+      </mat-list>
     </div>
   </div>
 </div>

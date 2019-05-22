@@ -11,7 +11,10 @@ export const environment = {
   },
   playlist: {
     getByUser: 'playlist/getPlaylistsByUser',
-    add : 'playlist/createPlaylist'
+    add : 'playlist/createPlaylist',
+    songs : {
+      updatePriority: 'playlist/updateSongsPriority'
+    }
   }
 };
 

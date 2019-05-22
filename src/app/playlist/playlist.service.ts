@@ -47,4 +47,29 @@ export class PlaylistService {
           return of(res);
         }));
   }
+
+  public updatePriority(userId, playlistId,songId, newPriority ): Observable<BackEndResponse> {
+    return this.http
+      .post<BackEndResponse>(`${environment.backEndUrl}/${environment.playlist.songs.updatePriority}`, {
+        userId: userId,
+        playlistId: playlistId,
+        songId: songId,
+        newPriority: newPriority
+      })
+      .pipe(map(res => {
+        const base1 = 'http://i1.ytimg.com/vi/';
+        const base2 = '/default.jpg';
+        res.data.forEach((playlist) => {
+          playlist.songs.forEach((song) => {
+            let songUrlPiece = song.url.split('watch?v=')[1];
+            song.imgUrl = base1 + songUrlPiece + base2;
+          })
+        })
+        return res;
+      }),
+        catchError((e): Observable<BackEndResponse> => {
+          const res: BackEndResponse = { statusCode: 222, codeMessage: 'CreatePlaylistError' };
+          return of(res);
+        }));
+  }
 }

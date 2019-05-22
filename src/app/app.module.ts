@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CustomMaterialModule } from './core/angular-material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { BrowseComponent } from './browse/browse.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    BrowseComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
     CustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

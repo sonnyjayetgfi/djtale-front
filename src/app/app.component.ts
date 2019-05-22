@@ -13,4 +13,12 @@ export class AppComponent {
   goToHome() {
     this.router.navigate(['home']);
   }
+
+  goToSettings() {
+    this.router.navigate(['settings']);
+  }
+  
+  goToPlaylists() {
+    this.router.navigate(['playlists']);
+  }
 }

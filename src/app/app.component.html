@@ -1,4 +1,26 @@
 <mat-toolbar class="header-bar">
-      <span class="title" (click)="goToHome()">DJ Tale </span>
-  </mat-toolbar>
+  <span class="tierPart leftSide">
+    <div class="logo">
+      <img src="assets/images/logo.png">
+    </div>
+    <div class="playlist">
+      <button (click)="goToPlaylists()" mat-button>My playlists</button>
+    </div>
+  </span>
+  <span class="tierPart middleSide">
+    <span class="title" (click)="goToHome()">DJ Tale </span>
+  </span>
+  <span class="tierPart rightSide">
+    <div class="welcome">
+      <span>
+        Welcome Sonny !
+      </span>
+    </div>
+    <div class="options">
+      <button (click)="goToSettings()" mat-button>Settings</button>
+      <button (click)="logout()" mat-button>Logout</button>
+    </div>
+  </span>
+
+</mat-toolbar>
 <router-outlet></router-outlet>
