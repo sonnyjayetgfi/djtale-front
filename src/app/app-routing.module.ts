@@ -3,16 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MainComponent } from './main/main.component';
+import { IsLoggedInGuard } from './guards/isLoggedInGuard';
+import { IsLoggedOutGuard } from './guards/isLoggedOutGuard';
 
 
 const routes: Routes = [
   {
     path: 'auth/login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [IsLoggedOutGuard]
   },
   {
     path: 'auth/register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [IsLoggedOutGuard]
   },
   {
     path: '',
@@ -21,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: MainComponent
+    component: MainComponent,
+    canActivate: [IsLoggedInGuard]
   },
 ];
 
