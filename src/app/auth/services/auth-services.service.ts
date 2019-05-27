@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { BackEndResponse } from '../../core/backEndResponse';
+import { BackEndResponse } from '../../../core/backEndResponse';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { BackEndResponse } from '../../core/backEndResponse';
 })
 export class AuthServicesService {
 
-  constructor(private http: HttpClient, private router: Router, ) { }
+  constructor(private jwtHelper : JwtHelperService, private http: HttpClient, private router: Router, ) { }
 
   public login(email: string, password: string): Observable<BackEndResponse> {
     return this.http
@@ -20,11 +21,11 @@ export class AuthServicesService {
       .pipe(
         map(res => {
           window.localStorage.setItem('user', JSON.stringify(res.data.user));
+          window.localStorage.setItem('jwt', JSON.stringify(res.data.jwt));
           return res;
         }),
         catchError((e): Observable<BackEndResponse> => {
-          console.log(e);
-          const res: BackEndResponse = { statusCode: 222, codeMessage: 'Login error' };
+          const res: BackEndResponse = e.error;
           return of(res);
         })
       );
@@ -38,8 +39,7 @@ export class AuthServicesService {
           return res;
         }),
         catchError((e): Observable<BackEndResponse> => {
-          console.log(e);
-          const res: BackEndResponse = { statusCode: 222, codeMessage: 'Register error' };
+          const res: BackEndResponse = e.error;
           return of(res);
         })
       );
@@ -56,7 +56,13 @@ export class AuthServicesService {
 
   public logout() {
     window.localStorage.removeItem('user');
+    window.localStorage.removeItem('jwt');
     this.router.navigate(['auth/login']);
+  }
+
+
+  public isUserTokenExpired(rawToken) {
+    this.jwtHelper.isTokenExpired(rawToken)
   }
 
 }

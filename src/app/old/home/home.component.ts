@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthServicesService } from '../auth/services/auth-services.service';
-import { Router } from '@angular/router';
+// import { Component, OnInit } from '@angular/core';
+// // import { AuthServicesService } from '../auth/services/auth-services.service';
+// import { Router } from '@angular/router';
 
-@Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
-})
-export class HomeComponent implements OnInit {
+// @Component({
+//   selector: 'home',
+//   templateUrl: './home.component.html',
+//   styleUrls: ['./home.component.scss']
+// })
+// export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthServicesService, private router: Router) { }
+//   constructor(private authService: AuthServicesService, private router: Router) { }
 
-  ngOnInit() {
-  }
+//   ngOnInit() {
+//   }
 
-  logout() {
-    this.authService.logout();
-  }
+//   logout() {
+//     this.authService.logout();
+//   }
 
-  goToPlaylistsPage() {
-    this.router.navigate(['playlists'])
-  }
+//   goToPlaylistsPage() {
+//     this.router.navigate(['playlists'])
+//   }
 
-}
+// }
