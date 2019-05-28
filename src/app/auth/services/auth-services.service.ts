@@ -21,7 +21,7 @@ export class AuthServicesService {
       .pipe(
         map(res => {
           window.localStorage.setItem('user', JSON.stringify(res.data.user));
-          window.localStorage.setItem('jwt', JSON.stringify(res.data.jwt));
+          window.localStorage.setItem('jwt', res.data.jwt);
           return res;
         }),
         catchError((e): Observable<BackEndResponse> => {
@@ -34,6 +34,20 @@ export class AuthServicesService {
   public register(email: string, password: string, pseudo: string): Observable<BackEndResponse> {
     return this.http
       .post<BackEndResponse>(`${environment.backEndUrl}/${environment.auth.register}`, { email, password, pseudo })
+      .pipe(
+        map(res => {
+          return res;
+        }),
+        catchError((e): Observable<BackEndResponse> => {
+          const res: BackEndResponse = e.error;
+          return of(res);
+        })
+      );
+  }
+
+  public test(): Observable<BackEndResponse> {
+    return this.http
+      .get<BackEndResponse>(`${environment.backEndUrl}/user/getByCriterias`)
       .pipe(
         map(res => {
           return res;

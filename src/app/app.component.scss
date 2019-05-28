@@ -3,64 +3,64 @@
 .header-bar {
   // border-radius: 0 0 35px 35px;
   color: white;
-  background-color: $blue;
+  background-color: $dark-blue;
   border-bottom: 1px solid white;
   width:100vw;
   display:flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height:7vh;
-  .tierPart {
-    width: 33.3vw;
-    display: flex;
-    flex-direction: row;
-    &.leftSide {
-      justify-content: space-between;
-      align-items: center;
-      .logo {
-        img {
-          padding-top:10px;
-          width:60px;
-          color:white;
-        }
-      }
-      .playlist {
-        button {
-        font-size: 25px;
-        }
-      }
-    }
-    &.middleSide {
-    justify-content: center;
-      .title {
-        font-size:30px;
-        font-family: 'Stylish';
-        cursor:pointer;
-        border:1px solid white;
-        padding:5px 10px 5px 10px;
-        border-radius:50px;
-      }
-    }
-    &.rightSide {
-      justify-content: space-between;
-      padding-right:30px;
-      align-content: center;
-      font-size:25px;
-      .welcome {
-        padding-top:5px;
-      }
-      .options {
-        width: 250px;
-        display:flex;
-        flex-direction: row;
-        justify-content: space-between;
-        button {
-          font-size:25px;
-        }
+  height:75px;
+  // .tierPart {
+  //   width: 33.3vw;
+  //   display: flex;
+  //   flex-direction: row;
+  //   &.leftSide {
+  //     justify-content: space-between;
+  //     align-items: center;
+  //     .logo {
+  //       img {
+  //         padding-top:10px;
+  //         width:60px;
+  //         color:white;
+  //       }
+  //     }
+  //     .playlist {
+  //       button {
+  //       font-size: 25px;
+  //       }
+  //     }
+  //   }
+  //   &.middleSide {
+  //   justify-content: center;
+  //     .title {
+  //       font-size:30px;
+  //       font-family: 'Stylish';
+  //       cursor:pointer;
+  //       border:1px solid white;
+  //       padding:5px 10px 5px 10px;
+  //       border-radius:50px;
+  //     }
+  //   }
+  //   &.rightSide {
+  //     justify-content: space-between;
+  //     padding-right:30px;
+  //     align-content: center;
+  //     font-size:25px;
+  //     .welcome {
+  //       padding-top:5px;
+  //     }
+  //     .options {
+  //       width: 250px;
+  //       display:flex;
+  //       flex-direction: row;
+  //       justify-content: space-between;
+  //       button {
+  //         font-size:25px;
+  //       }
         
-      }
-    }
+  //     }
+  //   }
     
-  }
+  // }
 }
