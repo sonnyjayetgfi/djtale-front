@@ -45,20 +45,6 @@ export class AuthServicesService {
       );
   }
 
-  public test(): Observable<BackEndResponse> {
-    return this.http
-      .get<BackEndResponse>(`${environment.backEndUrl}/user/getByCriterias`)
-      .pipe(
-        map(res => {
-          return res;
-        }),
-        catchError((e): Observable<BackEndResponse> => {
-          const res: BackEndResponse = e.error;
-          return of(res);
-        })
-      );
-  }
-
   public getIdentity() {
     const user = JSON.parse(window.localStorage.getItem('user'));
     return {

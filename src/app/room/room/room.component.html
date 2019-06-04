@@ -1,0 +1,15 @@
+<div *ngIf="!!currentRoom">
+  <h1>Welcome to {{currentRoom.name}}</h1>
+  <h1><button (click)="getBackToHome()">Back</button></h1>
+  <h3 *ngIf="currentRoom.data.users > 1">There are {{currentRoom.data.users}} people here</h3>
+  <h3 *ngIf="currentRoom.data.users === 1">You are alone here</h3>
+  <div>
+    Add a song : <br>
+    Name :  <input type="text" [(ngModel)]="formName"/> <br>
+    Url :  <input type="text" [(ngModel)]="formUrl" /> <button (click)="addSong()">Ok</button>
+  </div>
+  <div>
+    <h2>All songs :</h2>
+    <div *ngFor="let song of currentRoom.playlist.songs"></div>
+  </div>
+</div>

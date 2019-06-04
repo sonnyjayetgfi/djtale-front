@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { MainComponent } from './main/main.component';
 import { IsLoggedInGuard } from './guards/isLoggedInGuard';
 import { IsLoggedOutGuard } from './guards/isLoggedOutGuard';
+import { RoomComponent } from './room/room/room.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,11 @@ const routes: Routes = [
     component: MainComponent,
     canActivate: [IsLoggedInGuard]
   },
+  {
+    path: 'room/:id',
+    component: RoomComponent,
+    canActivate: [IsLoggedInGuard]
+  }
 ];
 
 @NgModule({

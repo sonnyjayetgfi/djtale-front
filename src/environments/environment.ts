@@ -4,16 +4,24 @@
 
 export const environment = {
   production: false,
-  backEndUrl : 'http://localhost:3000',
-  auth : {
-    login : 'auth/login',
+  backEndUrl: 'http://172.16.99.7:3333',
+  auth: {
+    login: 'auth/login',
     register: 'auth/register'
   },
   playlist: {
     getByUser: 'playlist/getPlaylistsByUser',
-    add : 'playlist/createPlaylist',
-    songs : {
+    add: 'playlist/createPlaylist',
+    songs: {
       updatePriority: 'playlist/updateSongsPriority'
+    }
+  },
+  room: {
+    getAll: 'room/getAll',
+    create: 'room/create',
+    getById: 'room/getById',
+    playlist: {
+      addSong: 'room/addSongToCurrentPlaylist'
     }
   }
 };

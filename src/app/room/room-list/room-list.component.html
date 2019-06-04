@@ -1,0 +1,38 @@
+<div style="width: 100vw">
+  <label>Create new room:</label>
+  <mat-form-field>
+    <input matInput [(ngModel)]="createRoomName" placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="createRoomDescription" placeholder="Description">
+  </mat-form-field>
+
+    <button (click)="createRoom()" mat-button>Create</button>
+    <br>
+    <table mat-table [dataSource]="roomList" class="mat-elevation-z8" style="width:50vw">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="creatorName">
+        <th mat-header-cell *matHeaderCellDef> Creator </th>
+        <td mat-cell *matCellDef="let element"> {{element.creatorName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Select </th>
+        <td mat-cell *matCellDef="let element"> <button mat-button (click)="joinRoom(element)">Join</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

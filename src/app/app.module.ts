@@ -11,11 +11,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MainComponent } from './main/main.component';
+import { RoomListComponent } from './room/room-list/room-list.component';
+import { RoomComponent } from './room/room/room.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+
+const socketIoConfig: SocketIoConfig = { url : 'http://172.16.99.7:4444', options: {}};
 
 
 function tokenGetter() {
   const token = window.localStorage.getItem('jwt');
-  console.log('token getter :'+ token);
   return token;
 }
 
@@ -25,6 +30,8 @@ function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     MainComponent,
+    RoomListComponent,
+    RoomComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,13 +44,14 @@ function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:3000'],
+        whitelistedDomains: ['172.16.99.7:3333'],
         blacklistedRoutes: [
-          'localhost:3000/auth/',
+          '172.16.99.7:3333/auth/',
         ],
       }
     }),
     DragDropModule,
+    SocketIoModule.forRoot(socketIoConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
