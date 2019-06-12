@@ -3,6 +3,7 @@ import { RoomService } from './room.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { Observable, Subscription } from 'rxjs';
+import { BrowseService } from 'src/app/old/browse/browse.service';
 
 @Component({
   selector: 'app-room',
@@ -16,9 +17,12 @@ export class RoomComponent implements OnInit {
   roomId: string;
   currentRoom: any;
   roomSubscribe : Subscription;
+  searchInput : string;
+  searchResults : Array<any>;
   formName : string;
   formUrl: string;
-  constructor(private socket: Socket, private roomService: RoomService, private route: ActivatedRoute, private router: Router) { }
+  chatMessageInput: string;
+  constructor(private browseService: BrowseService, private socket: Socket, private roomService: RoomService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.getRoomInfo();
@@ -27,36 +31,45 @@ export class RoomComponent implements OnInit {
   }
 
   getBackToHome() {
+    this.roomService.leaveRoom(this.roomId);
     this.router.navigate(['/']);
   }
 
   getRoomInfo() {
     this.route.params.subscribe(params => {
       const roomId = params['id'];
+      this.roomId = roomId;
       this.roomService.getRoom(roomId);
       this.socket.fromEvent('room-'+roomId).subscribe(room => this.currentRoom = room);
-      this.socket.on('room-'+roomId, (data) => {
-        console.log(data);
-      })
+      // this.socket.on('room-'+roomId, (data) => {
+      //   console.log(data);
+      // })
     });
   }
 
-  addSong() {
-    let obj = {
-      name : this.formName,
-      url : this.formUrl
-    }
-    this.roomService.addSongToRoomPlaylist(this.roomId, obj).subscribe(res => console.log(res));
+  postMessage() {
+    this.roomService.addMessageToRoomChat(this.roomId, this.chatMessageInput);
   }
 
-  // getRoomById(id) {
-  //   this.roomService.getRoomById(id).subscribe(res => {
-  //     if (res.statusCode === 200) {
-  //       this.room = res.data;
-  //     } else {
-  //       console.log('request error', res)
-  //     }
-  //   });
-  // }
+  addSongToPlaylist(searchResult) {
+    let obj = {
+      name : searchResult.snippet.title,
+      url : searchResult.url
+    }
+    this.roomService.addSongToRoomPlaylist(this.roomId, obj);
+  }
+
+  searchSong() {
+    this.browseService.search(this.searchInput).subscribe(res => {
+      res.forEach(item => {
+        item.url = "https://www.youtube.com/watch?v="+ item.id.videoId;
+      })
+      this.searchResults = res;
+    })
+
+  }
+
+
+
 
 }

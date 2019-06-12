@@ -1,15 +1,37 @@
-<div *ngIf="!!currentRoom">
-  <h1>Welcome to {{currentRoom.name}}</h1>
-  <h1><button (click)="getBackToHome()">Back</button></h1>
-  <h3 *ngIf="currentRoom.data.users > 1">There are {{currentRoom.data.users}} people here</h3>
-  <h3 *ngIf="currentRoom.data.users === 1">You are alone here</h3>
-  <div>
-    Add a song : <br>
-    Name :  <input type="text" [(ngModel)]="formName"/> <br>
-    Url :  <input type="text" [(ngModel)]="formUrl" /> <button (click)="addSong()">Ok</button>
+<div *ngIf="!!currentRoom" style="display:flex;">
+  <div style="flex:30%">
+    <h1>Welcome to {{currentRoom.name}}</h1>
+    <h1><button (click)="getBackToHome()">Back</button></h1>
+    <div *ngIf="currentRoom.data.users.length > 1">
+      <h3>There are {{currentRoom.data.users.length}} people here</h3>
+      <ul>
+        <li *ngFor="let member of currentRoom.data.users">{{member.pseudo}}</li>
+      </ul>
+    </div>
+
+    <h3 *ngIf="currentRoom.data.users.length === 1">You are alone here </h3>
+
+    <div style="border: 1px solid black; height: 50vh;position:relative">
+      <h2 style="text-align:center">Chat</h2>
+      <textarea style="bottom:0; position:absolute; width:100%" [(ngModel)]="chatMessageInput"></textarea>
+    </div>
   </div>
-  <div>
-    <h2>All songs :</h2>
-    <div *ngFor="let song of currentRoom.playlist.songs"></div>
+  <div style="flex:40%">
+    <div>
+      Add a song : <br>
+      <input type="text" [(ngModel)]="searchInput"><button (click)="searchSong()">Search</button>
+      <ul>
+        <li *ngFor="let searchResult of searchResults"><button (click)="addSongToPlaylist(searchResult)">Add To
+            Playlist</button>{{searchResult.snippet.title}}</li>
+      </ul>
+    </div>
+  </div>
+  <div style="flex:30%">
+    <div>
+      <h2>All songs :</h2>
+      <ul>
+        <li *ngFor="let song of currentRoom.playlist.songs">{{song.name}}</li>
+      </ul>
+    </div>
   </div>
 </div>

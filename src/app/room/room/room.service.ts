@@ -25,15 +25,24 @@ export class RoomService {
       }));
   }
 
-  public addSongToRoomPlaylist(roomId, song): Observable<BackEndResponse> {
-    return this.http.post<BackEndResponse>(`${environment.backEndUrl}/${environment.room.playlist.addSong}`, {
-      roomId, ...song
-    })
+  public addSongToRoomPlaylist(id, song) {
+    // const user = window.localStorage.getItem('user');
+    this.socket.emit('addSong', { roomId: id, song });
+  }
+
+  public leaveRoom(id) {
+    const user = window.localStorage.getItem('user');
+    this.socket.emit('leave', { roomId: id, user });
   }
 
   public getRoom(id) {
-    // const user = window.localStorage.getItem('user');
-    this.socket.emit('join', { roomId: id });
+    const user = window.localStorage.getItem('user');
+    this.socket.emit('join', { roomId: id, user });
+  }
+
+  public addMessageToRoomChat(roomId, message) {
+    const user = window.localStorage.getItem('user');
+    this.socket.emit('chatMessage', { roomId: roomId, user, message });
   }
 }
 
